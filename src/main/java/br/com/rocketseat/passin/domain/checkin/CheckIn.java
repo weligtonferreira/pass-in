@@ -2,10 +2,16 @@ package br.com.rocketseat.passin.domain.checkin;
 
 import br.com.rocketseat.passin.domain.attendee.Attendee;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "check_ins")
 public class CheckIn {
