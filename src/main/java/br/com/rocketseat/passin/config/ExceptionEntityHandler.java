@@ -3,7 +3,9 @@ package br.com.rocketseat.passin.config;
 import br.com.rocketseat.passin.domain.attendee.exceptions.AttendeeAlreadyExistsException;
 import br.com.rocketseat.passin.domain.attendee.exceptions.AttendeeNotFoundException;
 import br.com.rocketseat.passin.domain.checkin.exceptions.CheckInAlreadyExistsException;
+import br.com.rocketseat.passin.domain.event.exceptions.EventFullException;
 import br.com.rocketseat.passin.domain.event.exceptions.EventNotFoundException;
+import br.com.rocketseat.passin.dto.general.ErrorResponseDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -14,6 +16,11 @@ public class ExceptionEntityHandler {
     @ExceptionHandler(EventNotFoundException.class)
     public ResponseEntity<Void> handleEventNotFound(EventNotFoundException exception) {
         return ResponseEntity.notFound().build();
+    }
+
+    @ExceptionHandler(EventFullException.class)
+    public ResponseEntity<ErrorResponseDTO> handleEventFull(EventFullException exception) {
+        return ResponseEntity.badRequest().body(new ErrorResponseDTO(exception.getMessage()));
     }
 
     @ExceptionHandler(AttendeeNotFoundException.class)
