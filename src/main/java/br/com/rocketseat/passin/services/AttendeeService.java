@@ -1,7 +1,7 @@
 package br.com.rocketseat.passin.services;
 
 import br.com.rocketseat.passin.domain.attendee.Attendee;
-import br.com.rocketseat.passin.domain.attendee.exceptions.AttendeeAlreadyExistException;
+import br.com.rocketseat.passin.domain.attendee.exceptions.AttendeeAlreadyExistsException;
 import br.com.rocketseat.passin.domain.attendee.exceptions.AttendeeNotFoundException;
 import br.com.rocketseat.passin.domain.checkin.CheckIn;
 import br.com.rocketseat.passin.dto.attendee.AttendeeBadgeResponseDTO;
@@ -9,7 +9,6 @@ import br.com.rocketseat.passin.dto.attendee.AttendeeDetails;
 import br.com.rocketseat.passin.dto.attendee.AttendeesListResponseDTO;
 import br.com.rocketseat.passin.dto.attendee.AttendeeBadgeDTO;
 import br.com.rocketseat.passin.repositories.AttendeeRepository;
-import br.com.rocketseat.passin.repositories.CheckinRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -59,7 +58,7 @@ public class AttendeeService {
         Optional<Attendee> isAttendeeRegistered = this.attendeeRepository.findByEventIdAndEmail(eventId, email);
 
         if (isAttendeeRegistered.isPresent()) {
-            throw new AttendeeAlreadyExistException("Attendee with email " + email + " already exists");
+            throw new AttendeeAlreadyExistsException("Attendee with email " + email + " already exists");
         }
     }
 
